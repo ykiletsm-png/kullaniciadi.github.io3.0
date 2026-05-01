@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yağmur İletişim - Cep Telefonu Tamiri & Aksesuar Satışı</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #2c3e6b;
+            overflow-x: hidden;
+        }
+
+        /* Renk Paleti */
+        :root {
+            --primary-color: #D8EBF2;
+            --secondary-color: #F8F8FF;
+            --accent-color: #2c3e6b;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 248, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(44, 62, 107, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .call-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .call-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #e3f2fd 100%);
+            position: relative;
+            padding: 120px 2rem 80px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c3e6b' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #5a6c7d;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .hero-btn.primary {
+            background: linear-gradient(45deg, var(--accent-color), #34495e);
+            color: white;
+        }
+
+        .hero-btn.secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(44, 62, 107, 0.3);
+        }
+
+        /* Social Media Banner */
+        .social-banner {
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+            padding: 2rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .social-item:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.3);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .social-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(44, 62, 107, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(44, 62, 107, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* MayTech Section */
+        .maytech-section {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #34495e 100%);
+            color: white;
+            position: relative;
+        }
+
+        .maytech-section .section-title {
+            color: white;
+        }
+
+        .maytech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .maytech-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .maytech-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .cta-buttons {
+            text-align: center;
+            gap: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-primary {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Why Us & Stats */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item, .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--secondary-color);
+            border-radius: 15px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        #map {
+            height: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(44, 62, 107, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--accent-color);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social a {
+            font-size: 2.5rem;
+            color: white;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .footer-social a:hover {
+            transform: scale(1.3) rotate(10deg);
+            color: #3498db;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Yağmur İletişim</a>
+            <ul class="nav-links">
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="#maytech">Toptan Satış</a></li>
+                <li><a href="#about">Hakkımızda</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+            <a href="tel:05357698441" class="call-btn">Hemen Ara</a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <h1>Telefonunuz Bizimle Güvende!</h1>
+        <p>Gaziantep'in Güvenilir Telefon Tamir & Aksesuar Merkezi</p>
+        <div class="hero-buttons">
+            <a href="tel:05357698441" class="hero-btn primary">Hemen Ara</a>
+            <a href="#services" class="hero-btn secondary">Hizmetlerimiz</a>
+        </div>
+    </section>
+
+    <!-- Social Media Banner -->
+    <section class="social-banner">
+        <div class="social-item" target="_blank" href="https://www.instagram.com/yagmur.iletisim_maytech">
+            <i class="fab fa-instagram social-icon"></i>
+            <div>
+                <div style="font-weight: 600; font-size: 1.1rem;">@yagmur.iletisim_maytech</div>
+                <div style="font-size: 0.9rem;">Takip Et</div>
+            </div>
+        </div>
+        <div class="social-item" target="_blank" href="https://www.tiktok.com/@yagmur_iletisim">
+            <i class="fab fa-tiktok social-icon"></i>
+            <div>
+                <div style="font-weight: 600; font-size: 1.1rem;">@yagmur_iletisim</div>
+                <div style="font-size: 0.9rem;">Takip Et</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section fade-in">
+        <h2 class="section-title">Hizmetlerimiz</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Ekran Değişimi</h3>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔋</div>
+                <h3>Batarya Değişimi</h3>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💧</div>
+                <h3>Su Hasarı Tamiri</h3>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Yazılım ve Format</h3>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎧</div>
+                <h3>Aksesuar Satışı</h3>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔌</div>
+                <h3>Güvenlik Soketi Tamiri</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- MayTech Section -->
+    <section id="maytech" class="section maytech-section fade-in">
+        <h2 class="section-title">MayTech — Cep Telefonu & Tablet Teknik Parça Toptan Satışı</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">
+            Yetkili bayi ve servisler için güvenilir toptan parça tedariki
+        </p>
+        <div class="maytech-grid">
+            <div class="maytech-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📦</div>
+                <h3>LCD & Kontrol Ekranları</h3>
+            </div>
+            <div class="maytech-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔋</div>
+                <h3>Orijinal & Muadil Bataryalar</h3>
+            </div>
+            <div class="maytech-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔩</div>
+                <h3>Kamera, Hoparlör & İç Donanım</h3>
+            </div>
+            <div class="maytech-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛠️</div>
+                <h3>Tamir Kitleri & Ekipmanları</h3>
+            </div>
+            <div class="maytech-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📲</div>
+                <h3>Flex Kablo & Konnektörler</h3>
+            </div>
+            <div class="maytech-card">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧰</div>
+                <h3>Tablet Yedek Parçaları</h3>
+            </div>
+        </div>
+        <div class="cta-buttons">
+            <a href="tel:05357698441" class="cta-btn cta-primary">Toptan Fiyat Teklifi Al → 0535 769 84 41</a>
+            <a href="https://wa.me/905357698441" class="cta-btn cta-secondary" target="_blank">WhatsApp ile Sipariş Ver</a>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="section fade-in">
+        <h2 class="section-title">Neden Biz?</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">✅</div>
+                <h3>Garantili İşçilik</h3>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Hızlı Servis</h3>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💰</div>
+                <h3>Uygun Fiyat</h3>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🛡️</div>
+                <h3>Orijinal Yedek Parça</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
+        <h2 class="section-title">Hakkımızda</h2>
+        <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem; color: #5a6c7d;">
+            Yağmur İletişim, Gaziantep'in en güvenilir cep telefonu tamir ve aksesuar satış merkezi olarak 
+            yıllardır hizmet vermektedir. MayTech markasıyla toptan teknik parça tedariki yapmaktayız.
+        </p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">500+</span>
+                Mutlu Müşteri
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">7 Gün</span>
+                Açık
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                Garantili Hizmet
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">Toptan &</span>
+                Perakende
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+        <h2 class="section-title">İletişim & Konum</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Bize Ulaşın</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <strong>Adres:</strong><br>
+                        Düztepe, 69052. Sokak No:64B<br>
+                        27240 Şahinbey/Gaziantep
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <strong>Telefon:</strong><br>
+                        <a href="tel:05357698441" style="color: var(--accent-color);">0535 769 84 41</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <strong>Çalışma Saatleri:</strong><br>
+                        Her gün açık, 21:00'e kadar
+                    </div>
+                </div>
+                <a href="https://wa.me/905357698441" target="_blank" class="call-btn" style="display: block; text-align: center; margin-top: 1rem;">WhatsApp'tan Yaz</a>
+            </div>
+            <div>
+                <iframe 
+                    id="map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3056.976614747228!2d37.3453!3d37.0527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDAzJzA5LjciTiAzN8KwMjAnNDIuNSJF!5e0!3m2!1str!2str!4v1699999999999"
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/yagmur.iletisim_maytech" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@yagmur_iletisim" target="_blank">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+        <p style="opacity: 0.8;">© 2025 Yağmur İletişim & MayTech. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/905357698441" class="whatsapp-float" target="_blank" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        }));
+
+        // Fade In Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
